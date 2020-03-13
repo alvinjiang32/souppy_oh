@@ -6,6 +6,7 @@ token = 'pk_222272c1554c4b7083c64705db326a65'
 static_tickers = '' # csv or json
 
 class requester:
+
     stocks = []
 
     # pass in a ticker symbol to retrieve data
@@ -21,7 +22,7 @@ class requester:
         day_low = data['low']
         date_updated = data['latestTime']
         day_change = data['change']
-        percent_change = float(data['change']) * 100
+        percent_change = data['changePercent']
         return {'ticker': ticker, 'name': name, 'open_price': open_price,
                 'closing_price': closing_price, 'day_high': day_high,
                 'day_low': day_low, 'date_updated': date_updated,
