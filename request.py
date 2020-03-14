@@ -35,10 +35,6 @@ class requester:
             str_data = str_data + key + ': ' + str(data[key]) + '\n'
         return str_data
 
-    # @staticmethod
-    # def get_default_stock_data(self):
-    #     for stock in requester.tickers:
-    #         print(self.get_stock_data(Stock(stock)))
 
 def main():
     # with open('tickers.json', 'r') as file:

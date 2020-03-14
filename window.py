@@ -7,7 +7,7 @@ from kivy.uix.button import Button
 from souppy_oh.request import requester
 
 class SearchScreen(GridLayout):
-    
+
     tickers = (lambda f: open(f).read())('symbols.csv').split()
 
     def __init__(self, **kwargs):
@@ -46,10 +46,6 @@ class SearchScreen(GridLayout):
             self.stock_info.text = 'Market Data for $' + \
                           self.search.text.upper() + ': \n\n' + \
                       requester.get_stock_data_str(self.search.text)
-
-    # for testing
-    # def on_text(self, instance, value):
-    #     print('The widget', instance, 'have:', value)
 
 
 class MyApp(App):
