@@ -54,8 +54,9 @@ class SearchScreen(GridLayout):
             self.stock_info.text = requester.get_stock_data_str(
                 self.search.text)
 
-    def on_text(self, instance, value):
-        print('The widget', instance, 'have:', value)
+    # for testing
+    # def on_text(self, instance, value):
+    #     print('The widget', instance, 'have:', value)
 
 
 class MyApp(App):
