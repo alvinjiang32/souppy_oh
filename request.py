@@ -2,7 +2,7 @@ from iexfinance.stocks import Stock
 import json
 import csv
 
-token = 'pk_222272c1554c4b7083c64705db326a65'
+token = open('secrets').read()
 
 class requester:
 
