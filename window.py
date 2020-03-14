@@ -1,48 +1,61 @@
 from kivy.app import App
 from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from souppy_oh.request import requester
 
-class SearchScreen(BoxLayout):
+class SearchScreen(GridLayout):
 
     def __init__(self, **kwargs):
         super(SearchScreen, self).__init__(**kwargs)
-        label = Label(text='Stock Name')
-        self.add_widget(label)
-        search = TextInput(multiline=False)
-        search.bind(on_text_validate=SearchScreen.on_enter)
-        self.add_widget(search)
-        enter = Button(text='Submit')
-        self.add_widget(enter)
-
-        textinput = TextInput()
-        textinput.bind(text=SearchScreen.on_text)
-        self.add_widget(textinput)
-
-        stock_info = Label()
-        self.add_widget(stock_info)
-
+        self.cols = 2
+        self.rows = 2
+        self.row_default_height = 40
+        self.row_force_default = True
         self.orientation = 'vertical'
 
+        label = Label(text='[i][b][size=40][color=3394FF]Enter a '
+                           'stock and hit '
+                           'submit[/i][/b][/size][/color]\nor\n '
+                           '[size=40][i][b][color=3394FF]Enter a stock and '
+                           'hit enter '
+                           'in the '
+                           'textbox[/i][/b][/size][/color]',
+                      halign='center', markup=True)
+        self.add_widget(label)
+        self.search = TextInput(multiline=False)
+        self.search.bind(on_text_validate=self.on_enter)
+        self.add_widget(self.search)
+
+        enter = Button(text='Submit')
+        enter.bind(on_press=self.on_submit)
+        self.add_widget(enter)
+
+        # textinput = TextInput()
+        # textinput.bind(text=SearchScreen.on_text)
+        # self.add_widget(textinput)
+
+        self.row_force_default = False
+        self.stock_info = Label(halign='left', valign='bottom', height=200)
+        self.add_widget(self.stock_info)
+
     def on_enter(self, instance):
-        self.stock_info.text = requester.get_stock_data()
-
-    @staticmethod
-    def on_text(instance, value):
-        print('The widget', instance, 'have:', value)
-
-    @staticmethod
-    def get_stock_info(value):
-        requester.get_stock_data(value)
-
-    @staticmethod
-    def on_focus(instance, value):
-        if value:
-            print('User focused', instance)
+        if self.search.text == '':
+            self.stock_info.text = 'Invalid input'
         else:
-            print('User de-focused', instance)
+            self.stock_info.text = requester.get_stock_data_str(
+                instance.text)
+
+    def on_submit(self):
+        if self.search.text == '':
+            self.stock_info.text = 'Invalid input'
+        else:
+            self.stock_info.text = requester.get_stock_data_str(
+                self.search.text)
+
+    def on_text(self, instance, value):
+        print('The widget', instance, 'have:', value)
 
 
 class MyApp(App):

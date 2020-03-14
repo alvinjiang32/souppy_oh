@@ -22,11 +22,19 @@ class requester:
         day_low = data['low']
         date_updated = data['latestTime']
         day_change = data['change']
-        percent_change = data['changePercent']
+        percent_change = str(data['changePercent'] * 100) + '%'
         return {'ticker': ticker, 'name': name, 'open_price': open_price,
                 'closing_price': closing_price, 'day_high': day_high,
                 'day_low': day_low, 'date_updated': date_updated,
                 'day_change': day_change, 'percent_change': percent_change}
+
+    @staticmethod
+    def get_stock_data_str(ticker):
+        data = requester.get_stock_data(ticker)
+        str_data = ''
+        for key in data:
+            str_data = str_data + key + ': ' + str(data[key]) + '\n'
+        return str_data
 
     @staticmethod
     def get_default_stock_data(self):
