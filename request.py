@@ -1,14 +1,12 @@
-from iexfinance.refdata import get_symbols
 from iexfinance.stocks import Stock
 import json
+import csv
 
 token = 'pk_222272c1554c4b7083c64705db326a65'
-static_tickers = '' # csv or json
 
 class requester:
 
     stocks = []
-    tickers = ['AAPL']
 
     # pass in a ticker symbol to retrieve data
     @staticmethod
@@ -37,25 +35,24 @@ class requester:
             str_data = str_data + key + ': ' + str(data[key]) + '\n'
         return str_data
 
-    @staticmethod
-    def get_default_stock_data(self):
-        for stock in static_tickers:
-            print(self.get_stock_data(Stock(stock)))
+    # @staticmethod
+    # def get_default_stock_data(self):
+    #     for stock in requester.tickers:
+    #         print(self.get_stock_data(Stock(stock)))
 
 def main():
-    done = False
-    while not done:
-        ticker = input('\nWhat stock would you like to look at?\nEnter x to '
-                       'quit.\n')
-        if ticker.lower() == 'x':
-            break;
-        values = requester.get_stock_data(ticker)
-        print('Info for', ticker)
-        for key in values:
-            if values[key] is not None:
-                print(key + ': ' + str(values[key]))
-            else:
-                print(key + ' does not have value')
+    # with open('tickers.json', 'r') as file:
+    #     tickers = json.load(file)
+    # symbols = []
+    # for values in tickers:
+    #     symbols.append(values['symbol'])
+    #
+    # with open('symbols.csv', 'w', newline='') as csvfile:
+    #     writer = csv.writer(csvfile, delimiter=' ')
+    #     writer.writerow(symbols)
+
+    # print(requester.tickers)
+    pass
 
 
 if __name__ == '__main__':

@@ -7,6 +7,8 @@ from kivy.uix.button import Button
 from souppy_oh.request import requester
 
 class SearchScreen(GridLayout):
+    
+    tickers = (lambda f: open(f).read())('symbols.csv').split()
 
     def __init__(self, **kwargs):
         super(SearchScreen, self).__init__(**kwargs)
@@ -30,34 +32,20 @@ class SearchScreen(GridLayout):
         self.add_widget(self.search)
 
         enter = Button(text='Search')
-        enter.bind(on_press=self.on_submit)
+        enter.bind(on_press=self.on_enter)
         self.add_widget(enter)
 
-        # textinput = TextInput()
-        # textinput.bind(text=SearchScreen.on_text)
-        # self.add_widget(textinput)
-
-        self.row_force_default = False
+        # self.row_force_default = False
         self.stock_info = Label(halign='left', valign='bottom', text='STONKS')
         self.add_widget(self.stock_info)
 
     def on_enter(self, instance):
-        try:
+        if self.search.text.upper() not in self.tickers:
+            self.stock_info.text = '$' + self.search.text.upper() + ' is an invalid ticker'
+        else:
             self.stock_info.text = 'Market Data for $' + \
-                 self.search.text.upper() + ': \n\n' + \
-                 requester.get_stock_data_str(self.search.text)
-        except IEXQueryError:
-            self.stock_info.text = '$' + self.search.text.upper() + ' is an ' \
-                                                              'invalid ticker'
-
-    def on_submit(self, instance):
-        try:
-            self.stock_info.text = 'Market Data for $' + \
-                 self.search.text.upper() + ': \n\n' + \
-                 requester.get_stock_data_str(self.search.text)
-        except IEXQueryError:
-            self.stock_info.text = '$' + self.search.text.upper() + ' is an ' \
-                                                                    'invalid ticker'
+                          self.search.text.upper() + ': \n\n' + \
+                      requester.get_stock_data_str(self.search.text)
 
     # for testing
     # def on_text(self, instance, value):
