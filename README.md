@@ -23,5 +23,5 @@ LESS IMPORTANT
 - [ ] Create a graph visual for different pieces of information\
 - [ ] Create a menu to have options for other features such as: Moving average, etc\
 - [ ] Support options :)\
-- [ ] Create informational pages on options, stocks, what each value means, and the basics
+- [ ] Create informational pages on options, stocks, what each value means, and the basics/
 

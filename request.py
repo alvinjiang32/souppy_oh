@@ -8,6 +8,7 @@ static_tickers = '' # csv or json
 class requester:
 
     stocks = []
+    tickers = ['AAPL']
 
     # pass in a ticker symbol to retrieve data
     @staticmethod
