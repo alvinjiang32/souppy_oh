@@ -1,0 +1,35 @@
+ScreenManagement:
+    StockInfoScreen:
+    BasicsInfoScreen:
+    MainMenuScreen:
+
+<MainMenuScreen>:
+    name: 'Main Screen'
+    Button:
+        text: 'Stocks'
+        on_press: root.manager.current = 'Stock Screen'
+    Button:
+        text: 'Basics'
+        on_press: root.manager.current = 'Basics Screen'
+
+
+<StockInfoScreen>:
+    name: 'Stock Screen'
+    BoxLayout:
+        Button:
+            text: 'Main Menu'
+            on_press: root.manager.current = 'Main Screen'
+        Button:
+            text: 'Basics'
+            on_press: root.manager.current = 'Basics Screen'
+
+<BasicsInfoScreen>:
+    name: 'Basics Screen'
+    BoxLayout:
+        Button:
+            text: 'Main Menu'
+            on_press: root.manager.current = 'Main Screen'
+        Button:
+            text: 'Stock Viewer'
+            on_press: root.manager.current = 'Stock Screen'
+
