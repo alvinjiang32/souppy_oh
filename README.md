@@ -3,6 +3,8 @@ overhauled souppy.
 
 This project is an extension and improvement to souppy. It will apply different API's to efficiently extract the desired data.
 
+Using Kivy was a mistake, will move forward using a web app...
+
 TO DO:
 ------
 
